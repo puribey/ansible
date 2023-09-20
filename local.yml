@@ -4,3 +4,5 @@
 - import_playbook: tasks/dotfiles.yml
 - import_playbook: tasks/nvim-setup.yml
 - import_playbook: tasks/rust.yml
+- import_playbook: tasks/fnm.yml
+- import_playbook: tasks/asdf.yml

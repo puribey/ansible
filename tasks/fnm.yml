@@ -1,0 +1,19 @@
+- hosts: localhost
+  become: false 
+  tasks:
+    - name: Install node versions
+      shell: fnm install {{ item }}
+      with_items:
+        - v16.17.0
+        - v18.12.1
+        - v18.13.0
+        - v20.2.0
+        - v20.5.1
+      tags:
+        - install
+        - fnm
+    - name: Set default node version
+      shell: fnm default v16.17.0
+      tags:
+        - install
+        - fnm

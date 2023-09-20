@@ -1,0 +1,4 @@
+- import_playbook: tasks/set-defaults.yml
+- import_playbook: tasks/homebrew.yml
+- import_playbook: tasks/dotfiles.yml
+- import_playbook: tasks/nvim-setup.yml

@@ -1,0 +1,34 @@
+- hosts: localhost
+  become: false
+  tasks:
+    - name: Install stow
+      homebrew:
+        name: "stow"
+        state: present
+      tags:
+        - install
+        - dotfiles
+    - name: Install pure prompt
+      homebrew:
+        name: "pure"
+        state: present
+      tags:
+        - install
+        - dotfiles
+    - name: Cloning .dotfiles
+      ansible.builtin.git:
+        repo: 'git@github.com:gianu/dotfiles.git'
+        dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+        recursive: yes
+        update: yes
+        accept_hostkey: yes
+        version: master
+      tags:
+        - install
+        - dotfiles
+    - name: Stow dotfiles
+      shell: cd $HOME/.dotfiles && ./osx
+      tags:
+        - install
+        - dotfiles
+

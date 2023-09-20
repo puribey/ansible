@@ -1,0 +1,202 @@
+- hosts: localhost
+  become: true
+  vars:
+    computer_name: laika
+    hostname: laika
+    localhost_name: laika
+  tasks:
+    - name: Set Computer Name
+      shell: scutil --set ComputerName {{ computer_name }}
+      tags:
+        - defaults
+    - name: Set Localhost Name
+      shell: scutil --set LocalHostName {{ localhost_name }}
+      tags:
+        - defaults
+    - name: Set NetBios name
+      shell: defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string {{ localhost_name }}
+      tags:
+        - defaults
+    - name: Hide Safari's bookmark bar
+      shell: defaults write com.apple.Safari ShowFavoritesBar -bool false
+      tags:
+        - defaults
+        - safari
+    - name: Set up Safari for development (Include Internal Debug Menu)
+      shell: defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+      tags:
+        - defaults
+        - safari
+    - name: Set up Safari for development (Include Develop Menu)
+      shell: defaults write com.apple.Safari IncludeDevelopMenu -bool true
+      tags:
+        - defaults
+        - safari
+    - name: Set up Safari for development (Include WebKit Developer Extras)
+      shell: defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+      tags:
+        - defaults
+        - safari
+    - name: Set up Safari for development (Include Content PageGroup Identifier)
+      shell: defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+      tags:
+        - defaults
+        - safari
+    - name: Set up Safari for development (Include Developer Extras)
+      shell: defaults write -g WebKitDeveloperExtras -bool true
+      tags:
+        - defaults
+        - safari
+    - name: Privacy - Do not send search queries to Apple (Universal Search)
+      shell: defaults write com.apple.Safari UniversalSearchEnabled -bool false
+      tags:
+        - defaults
+        - safari
+        - privacy
+    - name: Privacy - Do not send search queries to Apple (Suppress Search Suggestion)
+      shell: defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+      tags:
+        - defaults
+        - safari
+        - privacy
+    - name: Prevent Safari from opening ‘safe’ files automatically after downloading
+      shell: defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+      tags:
+        - defaults
+        - safari
+    - name: Set Safari’s home page to `about:blank` for faster loading
+      shell: defaults write com.apple.Safari HomePage -string "about:blank"
+      tags:
+        - defaults
+        - safari
+    - name: Use AirDrop over every interface.
+      shell: defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+      tags:
+        - defaults
+        - airdrop
+    - name: Disable inline attachments in Mail.app (just show the icons)
+      shell: defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+      tags:
+        - defaults
+        - mail
+    - name: Activity Monitor - Show the main window when launching Activity Monitor
+      shell: defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+      tags:
+        - defaults
+        - activityMonitor
+    - name: Activity Monitor - Visualize CPU usage in the Activity Monitor Dock icon
+      shell: defaults write com.apple.ActivityMonitor IconType -int 5
+      tags:
+        - defaults
+        - activityMonitor
+    - name: Activity Monitor - Show all processes in Activity Monitor
+      shell: defaults write com.apple.ActivityMonitor ShowCategory -int 0
+      tags:
+        - defaults
+        - activityMonitor
+    - name: Activity Monitor - Sort Activity Monitor results by CPU usage - Column
+      shell: defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+      tags:
+        - defaults
+        - activityMonitor
+    - name: Activity Monitor - Sort Activity Monitor results by CPU usage - Direction
+      shell: defaults write com.apple.ActivityMonitor SortDirection -int 0
+      tags:
+        - defaults
+        - activityMonitor
+    - name: Keyboard - Set a really fast keyboard repeat rate - keyRepeat
+      shell: defaults write -g KeyRepeat -int 1.02
+      tags:
+        - defaults
+        - keyboard
+    - name: Keyboard - Set a really fast keyboard repeat rate - InitialKeyRepeat
+      shell: defaults write -g InitialKeyRepeat -int 10
+      tags:
+        - defaults
+        - keyboard
+    - name: Screen - Require password after sleep or screen saver
+      shell: defaults write com.apple.screensaver askForPassword -int 1
+      tags:
+        - defaults
+        - screen
+    - name: Screen - Require password after sleep or screen saver (no delay)
+      shell: defaults write com.apple.screensaver askForPasswordDelay -int 0
+      tags:
+        - defaults
+        - screen
+    - name: Screen - Disable shadow on screenshots
+      shell: defaults write com.apple.screencapture disable-shadow -bool true
+      tags:
+        - defaults
+        - screen
+    - name: Screen - Enable sub-pixel rendering on non-Apple LCDs.
+      shell: defaults write NSGlobalDomain AppleFontSmoothing -int 2
+      tags:
+        - defaults
+        - screen
+    - name: Screen - Disable and kill Dashboard
+      shell: defaults write com.apple.dashboard mcx-disabled -boolean YES; killall Dock
+      tags:
+        - defaults
+        - screen
+    - name: Finder - Show the ~/Library folder
+      shell: chflags nohidden ~/Library
+      tags:
+        - defaults
+        - finder 
+    - name: Finder -  Show external Hard Drives on desktop
+      shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+      tags:
+        - defaults
+        - finder 
+    - name: Finder - Show Removable Media on Desktop
+      shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+      tags:
+        - defaults
+        - finder 
+    - name: Finder -  Always use column view
+      shell: defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+      tags:
+        - defaults
+        - finder 
+    - name: Finder - Disable the warning when changing file extensions
+      shell: defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+      tags:
+        - defaults
+        - finder 
+    - name: Finder - Allow text-selection in Quick Look
+      shell: defaults write com.apple.finder QLEnableTextSelection -bool true
+      tags:
+        - defaults
+        - finder 
+    - name: Finder - Enable auto-correct
+      shell: defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
+      tags:
+        - defaults
+        - finder 
+    - name: Finder - Disable the crash reporter
+      shell: defaults write com.apple.CrashReporter DialogType -string "none"
+      tags:
+        - defaults
+        - finder 
+    - name: SSD - Disable the sudden motion sensor as it’s not useful for SSDs
+      shell: sudo pmset -a sms 0
+      tags:
+        - defaults
+        - ssd
+    - name: Dock - Autohide Dock
+      shell: defaults write com.apple.dock autohide -bool true
+      tags:
+        - defaults
+        - dock
+    - name: Turn Off Hibernation
+      shell: pmset -a hibernatemode 0
+      tags:
+        - defaults
+        - timeMachine
+    - name: Delete hibernation image file
+      shell: command rm -rf /var/vm/sleepimage
+      tags:
+        - defaults
+        - timeMachine
+

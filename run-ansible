@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# ansible-playbook -t dotfiles local.yml --ask-become-pass
+ansible-playbook local.yml --ask-become-pass
+

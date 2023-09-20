@@ -1,0 +1,42 @@
+- hosts: localhost
+  become: true
+  vars:
+    source_key: "../.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+  tasks:
+    - name: Ensure .ssh directory exists
+      file:
+        dest: "{{ dest_key | dirname }}"
+        mode: 0700
+        state: directory
+      tags:
+        - dotfiles
+        - install
+        - ssh
+    - name: Install ssh key (private)
+      copy:
+        src: "{{ source_key }}"
+        dest: "{{ dest_key }}"
+        owner: gianu
+        group: staff
+        mode: 0400
+      tags:
+        - dotfiles
+        - install
+        - ssh
+    - name: Install ssh key (public)
+      copy:
+        src: "{{ source_key }}.pub"
+        dest: "{{ dest_key }}.pub"
+        owner: gianu
+        group: staff
+        mode: 0400
+      tags:
+        - dotfiles
+        - install
+        - ssh
+    - name: Set authorized key took from file
+      authorized_key:
+        user: "{{ lookup('env', 'USER') }}"
+        state: present
+        key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"

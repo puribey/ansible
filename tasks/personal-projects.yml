@@ -1,0 +1,27 @@
+- hosts: localhost
+  become: false
+  tasks:
+    - name: Personal Project ansible
+      ansible.builtin.git:
+        repo: 'git@github.com:gianu/ansible.git'
+        dest: "{{ lookup('env', 'HOME')}}/personal/ansible"
+        bare: false
+      tags:
+        - install
+        - personal-project
+    - name: Personal Disney Manija Countdown bot
+      ansible.builtin.git:
+        repo: 'git@github.com:gianu/disney_manija_countdown_bot.git'
+        dest: "{{ lookup('env', 'HOME')}}/personal/disney_manija_countdown_bot"
+        bare: false
+      tags:
+        - install
+        - personal-project
+    - name: Personal WriteJam
+      ansible.builtin.git:
+        repo: 'git@github.com:gianu/writejam.git'
+        dest: "{{ lookup('env', 'HOME')}}/personal/writejam"
+        bare: false
+      tags:
+        - install
+        - personal-project

@@ -1,0 +1,32 @@
+- hosts: localhost
+  become: false
+  tasks:
+    - name: Create ~/work/stackrock
+      shell: cd ~ && mkdir -p ~/work/stackrock
+      tags:
+        - install
+        - stackrock-project
+    - name: Stackrock - Dundun.io
+      ansible.builtin.git:
+        repo: 'git@github.com:stackrock/dundun.io.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/stackrock/dundun.io"
+        bare: false
+      tags:
+        - install
+        - stackrock-project
+    - name: Stackrock - DiffJam
+      ansible.builtin.git:
+        repo: 'git@github.com:diffjam/diffjam.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/stackrock/diffjam"
+        bare: false
+      tags:
+        - install
+        - stackrock-project
+    - name: Stackrock  - gochroma
+      ansible.builtin.git:
+        repo: 'git@github.com:urjitbhatia/gochroma.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/stackrock/gochroma"
+        bare: false
+      tags:
+        - install
+        - stackrock-project

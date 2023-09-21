@@ -1,0 +1,104 @@
+- hosts: localhost
+  become: false
+  tasks:
+    - name: Create ~/work/classdojo
+      shell: cd ~ && mkdir -p ~/work/classdojo
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - api
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/api.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/api"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - Web-Monorepo
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/web-monorepo.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/web-monorepo"
+        bare: false 
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - logs.classdojo.com
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/logs.classdojo.com.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/logs.classdojo.com"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - email-templater
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/email-templater.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/email-templater"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - nomad-system-jobs
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/nomad-system-jobs.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/nomad-system-jobs"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - msr
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/msr.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/msr"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - terraform-infra
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/terraform-infra.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/terraform-infra"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - mojognosis
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/mojognosis.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/mojognosis"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - generate-haproxy-cfg
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/generate-haproxy-cfg.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/generate-haproxy-cfg"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - pdf
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/pdf.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/pdf"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - renderer
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/renderer.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/renderer"
+        bare: false
+      tags:
+        - install
+        - classdojo-project
+    - name: ClassDojo - mojo-and-friends
+      ansible.builtin.git:
+        repo: 'git@github.com:classdojo/mojo-and-friends.git'
+        dest: "{{ lookup('env', 'HOME')}}/work/classdojo/mojo-and-friends"
+        bare: false
+      tags:
+        - install
+        - classdojo-project

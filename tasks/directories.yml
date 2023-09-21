@@ -1,0 +1,19 @@
+- hosts: localhost
+  become: false
+  tasks:
+    - name: create ~/work
+      shell: cd ~ && mkdir -p work
+      tags:
+        - install
+        - directories
+    - name: create ~/play
+      shell: cd ~ && mkdir -p play
+      tags:
+        - install
+        - directories
+    - name: create ~/personal
+      shell: cd ~ && mkdir -p personal
+      tags:
+        - install
+        - directories
+

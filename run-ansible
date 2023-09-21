@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ansible-playbook -t zsh local.yml --ask-become-pass --ask-vault-password
+# ansible-playbook -t tmux local.yml --ask-become-pass --ask-vault-password
 ansible-playbook local.yml --ask-become-pass --ask-vault-password
 
 # sudo ansible-pull -U https://github.com/gianu/ansible.git --ask-vault-password

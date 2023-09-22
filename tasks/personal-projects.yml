@@ -9,6 +9,14 @@
       tags:
         - install
         - personal-project
+    - name: Personal Project ansible-private
+      ansible.builtin.git:
+        repo: 'git@github.com:gianu/ansible-private.git'
+        dest: "{{ lookup('env', 'HOME')}}/personal/ansible-private"
+        bare: false
+      tags:
+        - install
+        - personal-project
     - name: Personal Disney Manija Countdown bot
       ansible.builtin.git:
         repo: 'git@github.com:gianu/disney_manija_countdown_bot.git'

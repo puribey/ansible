@@ -3,8 +3,6 @@
   vars:
     source_key: "../.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    source_key_id_ed25519: "../.ssh/id_ed25519"
-    dest_key_id_ed25519: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     source_key_config: "../.ssh/config"
     dest_key_config: "{{ lookup('env', 'HOME') }}/.ssh/config"
   tasks:
@@ -21,9 +19,9 @@
       copy:
         src: "{{ source_key }}"
         dest: "{{ dest_key }}"
-        owner: gianu
+        owner: puribey
         group: staff
-        mode: 0400
+        mode: 0600
       tags:
         - dotfiles
         - install
@@ -32,47 +30,9 @@
       copy:
         src: "{{ source_key }}.pub"
         dest: "{{ dest_key }}.pub"
-        owner: gianu
+        owner: puribey
         group: staff
-        mode: 0400
-      tags:
-        - dotfiles
-        - install
-        - ssh
-    - name: Set authorized key took from file
-      authorized_key:
-        user: "{{ lookup('env', 'USER') }}"
-        state: present
-        key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
-    - name: Install id_ed25519 ssh key (private)
-      copy:
-        src: "{{ source_key_id_ed25519 }}"
-        dest: "{{ dest_key_id_ed_25519 }}"
-        owner: gianu
-        group: staff
-        mode: 0400
-      tags:
-        - dotfiles
-        - install
-        - ssh
-    - name: Install id_ed25519 ssh key (public)
-      copy:
-        src: "{{ source_key_id_ed25519 }}.pub"
-        dest: "{{ dest_key_id_ed25519 }}.pub"
-        owner: gianu
-        group: staff
-        mode: 0400
-      tags:
-        - dotfiles
-        - install
-        - ssh
-    - name: Copy ssh config file
-      copy:
-        src: "{{ source_key_config }}"
-        dest: "{{ dest_key_config }}"
-        owner: gianu
-        group: staff
-        mode: 0644
+        mode: 0600
       tags:
         - dotfiles
         - install

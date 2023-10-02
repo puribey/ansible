@@ -1,19 +1,18 @@
 - hosts: localhost
   become: false
   tasks:
-    - name: create ~/work
-      shell: cd ~ && mkdir -p work
+    - name: create ~/Documents/Classdojo
+      shell: cd ~/Documents && mkdir -p Classdojo
       tags:
         - install
         - directories
-    - name: create ~/play
-      shell: cd ~ && mkdir -p play
+    - name: create ~/Documents/Proyectos
+      shell: cd ~/Documents && mkdir -p Proyectos
       tags:
         - install
         - directories
-    - name: create ~/personal
-      shell: cd ~ && mkdir -p personal
+    - name: create ~/Documents/Watashi
+      shell: cd ~/Documents && mkdir -p Watashi
       tags:
         - install
         - directories
-

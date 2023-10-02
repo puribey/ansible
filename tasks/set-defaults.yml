@@ -1,9 +1,9 @@
 - hosts: localhost
   become: true
   vars:
-    computer_name: laika
-    hostname: laika
-    localhost_name: laika
+    computer_name: alfred
+    hostname: alfred
+    localhost_name: alfred
   tasks:
     - name: Set Computer Name
       shell: scutil --set ComputerName {{ computer_name }}
@@ -143,42 +143,37 @@
       shell: chflags nohidden ~/Library
       tags:
         - defaults
-        - finder 
+        - finder
     - name: Finder -  Show external Hard Drives on desktop
       shell: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
       tags:
         - defaults
-        - finder 
+        - finder
     - name: Finder - Show Removable Media on Desktop
       shell: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
       tags:
         - defaults
-        - finder 
-    - name: Finder -  Always use column view
-      shell: defaults write com.apple.Finder FXPreferredViewStyle Nlsv
-      tags:
-        - defaults
-        - finder 
+        - finder
     - name: Finder - Disable the warning when changing file extensions
       shell: defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
       tags:
         - defaults
-        - finder 
+        - finder
     - name: Finder - Allow text-selection in Quick Look
       shell: defaults write com.apple.finder QLEnableTextSelection -bool true
       tags:
         - defaults
-        - finder 
+        - finder
     - name: Finder - Enable auto-correct
       shell: defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
       tags:
         - defaults
-        - finder 
+        - finder
     - name: Finder - Disable the crash reporter
       shell: defaults write com.apple.CrashReporter DialogType -string "none"
       tags:
         - defaults
-        - finder 
+        - finder
     - name: SSD - Disable the sudden motion sensor as it’s not useful for SSDs
       shell: sudo pmset -a sms 0
       tags:
@@ -189,14 +184,3 @@
       tags:
         - defaults
         - dock
-    - name: Turn Off Hibernation
-      shell: pmset -a hibernatemode 0
-      tags:
-        - defaults
-        - timeMachine
-    - name: Delete hibernation image file
-      shell: command rm -rf /var/vm/sleepimage
-      tags:
-        - defaults
-        - timeMachine
-

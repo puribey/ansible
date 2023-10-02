@@ -3,12 +3,6 @@
 - import_playbook: tasks/directories.yml
 - import_playbook: tasks/homebrew.yml
 - import_playbook: tasks/dotfiles.yml
-- import_playbook: tasks/zsh.yml
-- import_playbook: tasks/personal-projects.yml
-- import_playbook: tasks/stackrock-projects.yml
 - import_playbook: tasks/work-projects.yml
-- import_playbook: tasks/nvim-setup.yml
-- import_playbook: tasks/tmux.yml
-- import_playbook: tasks/rust.yml
 - import_playbook: tasks/fnm.yml
-- import_playbook: tasks/asdf.yml
+- import_playbook: tasks/oh-my-zsh.yml

@@ -8,16 +8,9 @@
       tags:
         - install
         - dotfiles
-    - name: Install pure prompt
-      homebrew:
-        name: "pure"
-        state: present
-      tags:
-        - install
-        - dotfiles
     - name: Cloning .dotfiles
       ansible.builtin.git:
-        repo: 'git@github.com:gianu/dotfiles.git'
+        repo: "git@github.com:puribey/dotfiles.git"
         dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
         recursive: yes
         update: yes
@@ -31,4 +24,3 @@
       tags:
         - install
         - dotfiles
-

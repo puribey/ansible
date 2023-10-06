@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ansible-playbook -t personal-project local.yml --ask-become-pass --ask-vault-password
-ansible-playbook local.yml --ask-become-pass --ask-vault-password
+ansible-playbook local.yml --ask-become-pass --ask-vault-password -vvv
 
 # sudo ansible-pull -U https://github.com/puribey/ansible.git --ask-vault-password
 

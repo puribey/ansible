@@ -37,3 +37,14 @@
         - dotfiles
         - install
         - ssh
+    - name: Install config
+      copy:
+        src: "{{ source_key_config }}"
+        dest: "{{ dest_key_config }}"
+        owner: puribey
+        group: staff
+        mode: 0644
+      tags:
+        - dotfiles
+        - install
+        - ssh
